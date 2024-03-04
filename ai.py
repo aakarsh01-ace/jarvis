@@ -1,5 +1,6 @@
 import pyttsx3
 import speech_recognition as sr
+import datetime
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -14,7 +15,7 @@ def speak(audio):
     print(audio)
     engine.runAndWait( )  # wait until audio finishes playing
     
-
+# voice to text
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -31,8 +32,22 @@ def takeCommand():
         speak("Sat that again please...")
         return "none"
     return query
+
+
+# Greetings
+def greet():
+    hour = int(datetime.datetime.now().hour)
     
+    if hour>=0 and hour<=12:
+        speak("Good Morning Sir")
+    elif hour>12 and hour<18:
+        speak("Good Afternoon Sir")
+    else:
+        speak("Good Evening Sir")
+    speak("I am Cypher, how may I assist you")
 
 if  __name__ == "__main__":
-    takeCommand()
-    #speak("Hello Sir, I am Jarvis")
+    greet()
+    
+    
+    
