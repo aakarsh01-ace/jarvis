@@ -1,12 +1,16 @@
 import pyttsx3
 import speech_recognition as sr
 import datetime
+import os
+import cv2
+from requests import get
+import wikipedia
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 #print(voices[0].id) the voices[0].id is simply the voice behind jarvis
 
-engine.setProperty('voices', voices[0].id)
+engine.setProperty('voices', voices[1].id)
 
 
 # text to speech
@@ -33,21 +37,55 @@ def takeCommand():
         return "none"
     return query
 
-
 # Greetings
 def greet():
     hour = int(datetime.datetime.now().hour)
     
-    if hour>=0 and hour<=12:
+    if hour>=0 and hour<12:
         speak("Good Morning Sir")
-    elif hour>12 and hour<18:
+    elif hour>=12 and hour<=18:
         speak("Good Afternoon Sir")
     else:
         speak("Good Evening Sir")
-    speak("I am Cypher, how may I assist you")
+    speak("How may I assist you")
 
 if  __name__ == "__main__":
     greet()
-    
-    
-    
+    #while True:
+    if 1:
+        query = takeCommand().lower()
+        
+        #logic for building tasks
+        if "open notepad" in query:
+            path = "C:\\Program Files\\WindowsApps\\Microsoft.WindowsNotepad_11.2312.18.0_x64__8wekyb3d8bbwe\\Notepad\\Notepad.exe"
+            os.startfile(path)
+            
+        elif "open fox" in query:
+            path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+            os.startfile(path)
+        
+        elif "open command" in query:
+            os.system("start cmd")
+            
+        elif "camera" in query:
+            cap = cv2.VideoCapture(0)
+            while True:
+                ret, img = cap.read()
+                cv2.imshow('Webcam', img)
+                k = cv2.waitKey(50)
+                if k == 27:
+                    break
+            cap.release()
+            cv2.destroyAllWindows()
+            
+        elif "get ip address" in query:
+            ip = get('https://api.ipify.org').text
+            speak(f"Your IP address is {ip}") 
+        
+        elif "wikipedia" in query:
+            speak("searching wiki...")
+            query = query.replace("wikipedia", "")
+            result = wikipedia.summary(query, sentences=3)
+            speak(result)
+            print(result)
+            
