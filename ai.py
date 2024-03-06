@@ -7,6 +7,7 @@ from requests import get
 import wikipedia
 import webbrowser
 import pywhatkit as kit
+import sys
 
 
 engine = pyttsx3.init('sapi5')
@@ -54,8 +55,8 @@ def greet():
 
 if  __name__ == "__main__":
     greet()
-    #while True:
-    if 1:
+    while True:
+    #if 1:
         query = takeCommand().lower()
         
         #logic for building tasks
@@ -101,8 +102,10 @@ if  __name__ == "__main__":
             speak("searching wiki...")
             query = query.replace("wikipedia", "")
             result = wikipedia.summary(query, sentences=3)
+            speak("According to wikipedia")
             speak(result)
-            print(result)        
+            print(result)    
+                
         # this will take you to youtube's home page   
         elif "open youtube" in query:
             webbrowser.open("www.youtube.com")
@@ -122,4 +125,9 @@ if  __name__ == "__main__":
             cm = takeCommand().lower()
             kit.search(f"{cm}")
             
-            
+        elif "sleep" in query:
+            speak("Affimative, Sir")
+            speak("Let me know if you have any other work.")
+            sys.exit()
+        speak("Sir, what's next on the list?")
+        
