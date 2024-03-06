@@ -5,6 +5,9 @@ import os
 import cv2
 from requests import get
 import wikipedia
+import webbrowser
+import pywhatkit as kit
+
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -47,7 +50,7 @@ def greet():
         speak("Good Afternoon Sir")
     else:
         speak("Good Evening Sir")
-    speak("How may I assist you")
+    speak("I am Cypher. How may I assist you")
 
 if  __name__ == "__main__":
     greet()
@@ -60,6 +63,18 @@ if  __name__ == "__main__":
             path = "C:\\Program Files\\WindowsApps\\Microsoft.WindowsNotepad_11.2312.18.0_x64__8wekyb3d8bbwe\\Notepad\\Notepad.exe"
             os.startfile(path)
             
+        elif "open word" in query:
+            path = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Word.lnk"
+            os.startfile(path)   
+            
+        #elif "write a note" in query or 'note':
+            #speak("What should I take a note of?")
+            #note = takeCommand()
+            #speak(f"You said, {note}. I will make a note of it.")
+            #with open("notes.txt", "a") as f:
+                #f.write(f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - {note}\n")
+            #speak("Note has been added to the file 'notes.txt'.")
+                     
         elif "open fox" in query:
             path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
             os.startfile(path)
@@ -87,5 +102,23 @@ if  __name__ == "__main__":
             query = query.replace("wikipedia", "")
             result = wikipedia.summary(query, sentences=3)
             speak(result)
-            print(result)
+            print(result)        
+            
+        elif "open youtube" in query:
+            webbrowser.open("www.youtube.com")
+        
+        elif "open instagram" in query:
+            webbrowser.open("www.instagram.com")
+            
+        elif "play on youtube" in query:
+            speak("Sir, which video should I play?") 
+            cm = takeCommand().lower()
+            kit.playonyt(f"{cm}")
+            
+            
+        elif "search" in query:
+            speak("What would you like to search for?")
+            cm = takeCommand().lower()
+            kit.search(f"{cm}")
+            
             
