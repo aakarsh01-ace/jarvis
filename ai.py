@@ -103,13 +103,14 @@ if  __name__ == "__main__":
             result = wikipedia.summary(query, sentences=3)
             speak(result)
             print(result)        
-            
+        # this will take you to youtube's home page   
         elif "open youtube" in query:
             webbrowser.open("www.youtube.com")
         
         elif "open instagram" in query:
             webbrowser.open("www.instagram.com")
-            
+        
+        # know the difference, this  one will only work for playing any random video you ask
         elif "play on youtube" in query:
             speak("Sir, which video should I play?") 
             cm = takeCommand().lower()
