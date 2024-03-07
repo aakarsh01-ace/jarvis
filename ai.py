@@ -37,7 +37,7 @@ def takeCommand():
         print(f"User said: {query}")
         
     except Exception as e:
-        speak("Sat that again please...")
+        speak("Say that again please...")
         return "none"
     return query
 
