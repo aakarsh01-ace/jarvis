@@ -8,6 +8,7 @@ import wikipedia
 import webbrowser
 import pywhatkit as kit
 import sys
+import pyjokes
 
 
 engine = pyttsx3.init('sapi5')
@@ -61,7 +62,7 @@ if  __name__ == "__main__":
         
         #logic for building tasks
         if "open notepad" in query:
-            path = "C:\\Program Files\\WindowsApps\\Microsoft.WindowsNotepad_11.2312.18.0_x64__8wekyb3d8bbwe\\Notepad\\Notepad.exe"
+            path = "C:\\Program Files\\WindowsApps\\Microsoft.WindowsNotepad_11.2401.26.0_x64__8wekyb3d8bbwe\\Notepad\\Notepad.exe"
             os.startfile(path)
             
         elif "open word" in query:
@@ -79,6 +80,9 @@ if  __name__ == "__main__":
         elif "open fox" in query:
             path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
             os.startfile(path)
+        
+        elif "close fox" in query:
+            os.system("taskkill /f /im firefox.exe")
         
         elif "open command" in query:
             os.system("start cmd")
@@ -124,6 +128,22 @@ if  __name__ == "__main__":
             speak("What would you like to search for?")
             cm = takeCommand().lower()
             kit.search(f"{cm}")
+        
+        elif "close notepad" in query:
+            speak("okay, closing notepad")
+            os.system("taskkill /f /im notepad.exe")
+            
+        elif "tell me a joke" in query:
+            joke = pyjokes.get_joke()
+            speak(joke)
+            
+        elif "shut down the system" in query:
+            os.system("shutdown /s /t 5")
+            
+        elif "restart the system" in query:
+            os.system("shutdown/ r/ t 5")
+            
+        
             
         elif "sleep" in query:
             speak("Affimative, Sir")
