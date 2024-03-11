@@ -138,10 +138,10 @@ if  __name__ == "__main__":
             speak(joke)
             
         elif "shut down the system" in query:
-            os.system("shutdown /s /t 5")
+            os.system("shutdown -s")
             
         elif "restart the system" in query:
-            os.system("shutdown/ r/ t 5")
+            os.system("shutdown -r")
             
         
             
