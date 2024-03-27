@@ -11,11 +11,12 @@ import sys
 import pyjokes
 
 
-engine = pyttsx3.init('sapi5')
+engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 #print(voices[0].id) the voices[0].id is simply the voice behind jarvis
 
-engine.setProperty('voices', voices[1].id)
+#engine.setProperty('voices', voices[0].id)
+engine.setProperty('pitch', 100)
 
 
 # text to speech
@@ -149,5 +150,5 @@ if  __name__ == "__main__":
             speak("Affimative, Sir")
             speak("Let me know if you have any other work.")
             sys.exit()
-        speak("Sir, what's next on the list?")
+        speak("Sir, what's next?")
         
